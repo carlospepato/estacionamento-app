@@ -11,26 +11,41 @@ datasource db {
 }
 
 model Parking {
-  id             String    @id @default(uuid())
-  name           String
-  cnpj           String
-  address        String
-  phone          String
-  maxCars        Int
-  maxMotorcycles Int
-  Vehicle        Vehicle[]
+  id                  String                @id @default(uuid())
+  name                String
+  cnpj                String
+  address             String
+  phone               String
+  maxCars             Int
+  maxMotorcycles      Int
+  Vehicle             Vehicle[]
+  VehicleEntryAndExit VehicleEntryAndExit[]
 
   @@map("parking")
 }
 
 model Vehicle {
-  id        String  @id @default(uuid())
-  plate     String
-  type      String
-  brand     String
-  model     String
-  parkingId String
-  parking   Parking @relation(fields: [parkingId], references: [id])
+  id                  String                @id @default(uuid())
+  plate               String
+  type                String
+  brand               String
+  model               String
+  parkingId           String
+  parking             Parking               @relation(fields: [parkingId], references: [id])
+  VehicleEntryAndExit VehicleEntryAndExit[]
 
   @@map("vehicle")
+}
+
+model VehicleEntryAndExit {
+  id        String   @id @default(uuid())
+  vehicleId String
+  parkingId String
+  entry     DateTime
+  exit      DateTime
+  value     Float
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  parking   Parking  @relation(fields: [parkingId], references: [id])
+
+  @@map("vehicle_entry_and_exit")
 }
