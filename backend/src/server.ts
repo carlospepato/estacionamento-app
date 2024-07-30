@@ -1,22 +1,14 @@
 import Fastify from 'fastify';
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from 'zod';
-import { prisma } from './lib/prisma.js';
+import { prisma } from './utils/prisma.js';
+import { config } from '../config/config.js';
+import { Parking } from './types/parking.js';
 
 const server = Fastify({logger: true});
 
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
-
-interface Parking {
-  id: string;
-  name: string;
-  cnpj: string;
-  address: string;
-  phone: string;
-  maxCars: number;
-  maxMotorcycles: number;
-}
 
 server.withTypeProvider<ZodTypeProvider>().get('/parkings',{
   schema:{
@@ -189,6 +181,6 @@ server.withTypeProvider<ZodTypeProvider>().post('/parkingvehicle/:id',{
   });
 });
 
-server.listen({port: 3333}).then(() => {
-  console.log('Server is running on port 3333');
+server.listen({port: config.port}).then(() => {
+  console.log(`Server is running on port ${config.port}`);
 });

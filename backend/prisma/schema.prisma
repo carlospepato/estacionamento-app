@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -20,8 +17,21 @@ model Parking {
   maxMotorcycles      Int
   Vehicle             Vehicle[]
   VehicleEntryAndExit VehicleEntryAndExit[]
+  User                User[]
 
   @@map("parking")
+}
+
+model User {
+  id        String  @id @default(uuid())
+  name      String
+  email     String  @unique
+  password  String
+  role      String
+  parking   Parking @relation(fields: [parkingId], references: [id])
+  parkingId String
+
+  @@map("user")
 }
 
 model Vehicle {
@@ -44,8 +54,8 @@ model VehicleEntryAndExit {
   entry     DateTime
   exit      DateTime
   value     Float
-  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
   parking   Parking  @relation(fields: [parkingId], references: [id])
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
 
   @@map("vehicle_entry_and_exit")
 }
