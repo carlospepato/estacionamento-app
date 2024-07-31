@@ -1,5 +1,5 @@
 export interface Parking {
-  id: string;
+  id?: string;
   name: string;
   cnpj: string;
   address: string;
