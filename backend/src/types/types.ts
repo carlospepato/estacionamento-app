@@ -7,3 +7,12 @@ export interface Parking {
   maxCars: number;
   maxMotorcycles: number;
 }
+
+export interface Vehicle {
+  id?: string;
+  plate: string;
+  type: string;
+  brand: string;
+  model: string;
+  parkingId: string;
+}

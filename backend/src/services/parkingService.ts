@@ -1,4 +1,4 @@
-import { Parking } from "../types/parking.js";
+import { Parking } from "../types/types.js";
 import { prisma } from "../utils/prisma.js";
 
 export async function getAllParkings() {
