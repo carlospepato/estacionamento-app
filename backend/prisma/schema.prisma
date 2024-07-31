@@ -36,7 +36,7 @@ model User {
 
 model Vehicle {
   id                  String                @id @default(uuid())
-  plate               String
+  plate               String                @unique
   type                String
   brand               String
   model               String
@@ -48,14 +48,14 @@ model Vehicle {
 }
 
 model VehicleEntryAndExit {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   vehicleId String
   parkingId String
   entry     DateTime
-  exit      DateTime
-  value     Float
-  parking   Parking  @relation(fields: [parkingId], references: [id])
-  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  exit      DateTime?
+  value     Float?
+  parking   Parking   @relation(fields: [parkingId], references: [id])
+  vehicle   Vehicle   @relation(fields: [vehicleId], references: [id])
 
   @@map("vehicle_entry_and_exit")
 }
