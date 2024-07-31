@@ -59,3 +59,9 @@ model VehicleEntryAndExit {
 
   @@map("vehicle_entry_and_exit")
 }
+
+model Price {
+  id   String @id @default(uuid())
+  type String
+  price Float
+}
