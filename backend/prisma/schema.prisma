@@ -61,7 +61,8 @@ model VehicleEntryAndExit {
 }
 
 model Price {
-  id   String @id @default(uuid())
-  type String
-  price Float
+  id        String @id @default(uuid())
+  type      String
+  price     Float
+  priceList String
 }

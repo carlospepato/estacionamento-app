@@ -45,6 +45,5 @@ export async function createEntryVehicle(props : Vehicle){
       }
     }
   );
-
   return {message: 'Vehicle entry created', id: entry.id};
 }
